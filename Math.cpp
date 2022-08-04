@@ -83,17 +83,17 @@ vector < int > prime_factorization(ll n){
 }
 
 
-const ll x=10000001;
-bool prime[x+1];
-void sieve (){
-    memset(prime , true , sizeof(prime));
-    prime[0]=prime[1]=0;
-    for(ll i=2 ; i*i<=x ; i++)
-    {
-        if(prime[i])
-        {
-            for(ll j=i*i ; j<=x ; j+=i)
-                prime[j]=false;
+const int N = 1e6 + 6;
+vector<bool> p;
+void sieve() {
+    const int N = 1e6 + 6;
+    p.assign(N, true);
+    p[0] = p[1] = false;
+    for (int i = 2; i < N; i++) {
+        if (p[i]) {
+            for (int j = i + i; j < N; j += i) {
+                p[j] = false;
+            }
         }
     }
 }

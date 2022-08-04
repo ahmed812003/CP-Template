@@ -10,6 +10,13 @@ ll fast_pow(int a , int b){
     return (b & 1 ? ret*ret*a: ret*ret);
 }
 
+ll fast_pow(ll x , ll a , ll mod){
+    if(a == 0) return 1;
+    if(a == 1) return x;
+    if(a % 2 == 0) return fast_pow((x*x)%mod, a/2 , mod);
+    return (x*fast_pow((x*x)%mod, a/2 , mod))%mod;
+}
+
 ll gcd(ll a, ll b)
 {
     if (a == 0) return b;

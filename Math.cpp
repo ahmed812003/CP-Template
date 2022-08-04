@@ -76,6 +76,28 @@ void sieve (){
     }
 }
 
+vector < ll > Get_Divisors(ll n){
+    vector < ll > divisors;
+    for(int i = 1; i < sqrt(n); i++)
+        if(n % i == 0) divisors.push_back(i), divisors.push_back(n / i);
+    if(sqrt(n) == int(sqrt(n))) divisors.push_back(sqrt(n));
+    return divisors;
+}
+
+// Complications of the number 
+for(int i=2 ; i<=m ; i++){
+    bool ok=0;
+    for(int j=i;j<=N;j+=i)
+    {
+        if(vis[j]) ok = 1;
+    }
+    if(ok)
+    {
+        for(int j=i;j<=N;j+=i)
+            take[j] = 1;
+    }
+}
+
 int main()
 {
     

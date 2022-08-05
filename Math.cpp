@@ -27,7 +27,7 @@ ll lcm(ll a, ll b) {
     return a / gcd(a, b) * b;
 }
 
-bool is_perfect_square(ll n){
+bool perfect_square(ll n){
     ll sq = sqrt(n);
     return sq * sq == n;
 }
@@ -73,7 +73,7 @@ void prime_factors(ll n) {
     }
 }
 
-vector < int > prime_factorization(ll n){
+vector <int> prime_factorization(ll n){
     vector < int > factors;
     while(n % 2 == 0) factors.push_back(2), n /= 2;
     for(int i = 3; i <= sqrt(n); i += 2)
@@ -98,7 +98,7 @@ void sieve() {
     }
 }
 
-vector < ll > Get_Divisors(ll n){
+vector <ll> get_divisors(ll n){
     vector < ll > divisors;
     for(int i = 1; i < sqrt(n); i++)
         if(n % i == 0) divisors.push_back(i), divisors.push_back(n / i);

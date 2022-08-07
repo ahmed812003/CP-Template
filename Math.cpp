@@ -107,19 +107,20 @@ vector <ll> get_divisors(ll n){
 }
 
 // Complications of the number 
-for(int i=2 ; i<=m ; i++){
-    bool ok=0;
-    for(int j=i;j<=N;j+=i)
-    {
-        if(vis[j]) ok = 1;
-    }
-    if(ok)
-    {
+void Complications_of_the_number (int N , int m){
+    for(int i=2 ; i<=m ; i++){
+        bool ok=0;
         for(int j=i;j<=N;j+=i)
-            take[j] = 1;
+        {
+            if(vis[j]) ok = 1;
+        }
+        if(ok)
+        {
+            for(int j=i;j<=N;j+=i)
+                take[j] = 1;
+        }
     }
 }
-
 void Print_Permutation(vector < int >& nums){
     sort(all(nums));
     do {

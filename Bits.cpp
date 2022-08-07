@@ -43,6 +43,24 @@ int findXOR(int n)
         return 0;
 }
 
+vector<vector<int>> bitmask (int n){
+    vector<int>temp;
+    vector<vector<int>>ans;
+    for(int mask=0 ; mask<(1<<n) ; mask++){
+        for(int i=0 ; i<n ; i++){
+            if(getBit(mask , i)){
+                temp.push_back(1);
+            }
+            else{
+                temp.push_back(0);
+            }
+        }
+        ans.push_back(temp);
+        temp.clear();
+    }
+    return ans;
+}
+
 int main()
 {    
     return 0;

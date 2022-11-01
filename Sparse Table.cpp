@@ -28,6 +28,21 @@ ll query(int l, int r) {
 
 }
 
+ll query_of_sum(int l , int r) {
+    int length = r - l + 1;
+    ll ret = 0;
+    for (int i = 0 ; i <= bits ; i++) {
+        if (length & (1 << i)) {
+            ret = merge(
+                      ret,
+                      table[i][l]
+                  );
+            l += (1 << i);
+        }
+    }
+    return ret;
+}
+
 void bulit (int size) {
     for (int i = 1 ; i <= size ; i++) {
         table[0][i] = arr[i];

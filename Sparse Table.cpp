@@ -10,49 +10,53 @@ void fast()
     cout.tie(NULL);
 }
 
-const int N = 2e5 + 7 , bits = 27;
-ll table [bits][N] , arr[N] , LOG[N];;
+const int N = 1e5 + 5 , bits = 27 , inf = 1e9 + 9;
+ll table[bits][N] , a[N] , LOG[N];
 
 ll merge (ll x, ll y) {
-    return max(x , y);
+    return min(x , y);
 }
-
-ll query(int l, int r) {
-    if (l == r)return 0;
-    if (r < l)swap(l, r);
+//O(1) There is no effect of overlap (min , max , gcd , lcm)
+void lastBit() {
+    for (int i = 2; i < N ; ++i) {
+        LOG[i] = LOG[i >> 1] + 1;
+    }
+}
+ll optimalQuery(int l , int r) {
+    if (r < l)swap(l , r);
     int msk = LOG[r - l + 1];
-    return max(
+    return merge(
                table[msk][l],
                table[msk][r - (1 << msk) + 1]
            );
 
 }
-
-ll query_of_sum(int l , int r) {
+// O(log) There is effect of overlap (sum , sub , mul , xor)
+ll query(int l , int r) {
+    if (r < l) swap(l , r);
     int length = r - l + 1;
-    ll ret = 0;
-    for (int i = 0 ; i <= bits ; i++) {
+    ll ans = 0;
+    for (int i = 0 ; i < bits ; i++) {
         if (length & (1 << i)) {
-            ret = merge(
-                      ret,
+            ans = merge(
+                      ans,
                       table[i][l]
                   );
             l += (1 << i);
         }
     }
-    return ret;
+    return ans;
 }
 
-void bulit (int size) {
-    for (int i = 1 ; i <= size ; i++) {
-        table[0][i] = arr[i];
-        LOG[i + 1] = LOG[(i + 1) >> 1] + 1;
+void buildTable (int size) {
+    for (int i = 0 ; i < size ; i++) {
+        table[0][i] = a[i];
     }
     for (int mask = 1 ; mask <= bits ; mask++) {
-        for (int i = 1 ; i + (1 << mask) - 1 <= size ; i++) {
+        for (int i = 0 ; i + (1 << mask) <= size ; i++) {
             table[mask][i] = merge(
-                                 table[mask - 1][i],
-                                 table[mask - 1][i + (1 << (mask - 1))]
+                                 table[mask - 1][i], // start from i with size/2;
+                                 table[mask - 1][i + (1 << (mask - 1))] // start from i+(size/2)  with size/2
                              );
         }
     }
